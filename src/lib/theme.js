@@ -100,6 +100,21 @@ export default [
     }
   },
   {
+    'id': 'gl-draw-line-active-label',
+    'type': 'symbol',
+    'filter': ['all', ['==', '$type', 'LineString'], ['==', 'active', 'true']],
+    'layout': {
+      'text-field': 'count: {user_count}',
+      'text-size': 16,
+    },
+    'paint': {
+      'text-color': 'rgba(0, 0, 0, 1)',
+      'text-halo-color': 'rgba(255, 255, 255, 1)',
+      'text-halo-width': 3,
+      'text-halo-blur': 1,
+    },
+  },
+  {
     'id': 'gl-draw-polygon-and-line-vertex-stroke-inactive',
     'type': 'circle',
     'filter': ['all',

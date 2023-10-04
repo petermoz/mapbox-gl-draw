@@ -36,7 +36,7 @@ map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
 const modes = MapboxDraw.modes;
 modes.static = StaticMode;
-const Draw = window.Draw = new MapboxDraw({ modes });
+const Draw = window.Draw = new MapboxDraw({ modes, userProperties: true });
 let drawIsActive = true;
 map.addControl(Draw, 'bottom-right');
 
@@ -65,6 +65,18 @@ map.on('load', () => {
     const style = currentStyle === 'streets-v9' ? 'dark-v9' : 'streets-v9';
     map.setStyle(`mapbox://styles/mapbox/${style}`);
     currentStyle = style;
+  };
+
+  // Increment a count field on the current feature.
+  const incBtn = document.getElementById('incBtn');
+  incBtn.onclick = function () {
+    const sel = Draw.getSelected();
+    if (sel.features.length > 0) {
+      const update = sel.features[0];
+      update.properties.count = (update.properties.count ?? 0) + 1;
+      console.log(update.properties)
+      Draw.add(update);
+    }
   };
 
   // toggle double click zoom
